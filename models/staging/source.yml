@@ -1,0 +1,85 @@
+version: 2
+sources:
+  - name: raw_data
+    database: north_dw
+    schema: raw_data
+    description: "Raw data used in this sales project."
+
+    tables:
+      - name: orders
+        description: "One row for each customer order."
+        columns:
+          - name: OrderID
+            description: "The ID of the order."
+          - name: CustomerID
+            description: "The customer who placed the order."
+          - name: OrderDate
+            description: "The date when the order was placed."
+          - name: RequiredDate
+            description: "The date when the customer needs the order."
+          - name: ShippedDate
+            description: "The date when the order was shipped."
+          - name: ShipCountry
+            description: "The country where the order was sent."
+          - name: Freight
+            description: "The shipping cost for the order."
+
+      - name: order_details
+        description: "Products and quantities in each order."
+        columns:
+          - name: OrderID
+            description: "The ID of the order."
+          - name: ProductID
+            description: "The ID of the product."
+          - name: UnitPrice
+            description: "The price of one product in the order."
+          - name: Quantity
+            description: "The number of units ordered."
+          - name: Discount
+            description: "The discount given on the product."
+
+      - name: products
+        description: "Product details and stock information."
+        columns:
+          - name: ProductID
+            description: "The ID of the product."
+          - name: ProductName
+            description: "The name of the product."
+          - name: CategoryID
+            description: "The category of the product."
+          - name: UnitPrice
+            description: "The current price of the product."
+          - name: UnitsInStock
+            description: "The number of units in stock."
+          - name: UnitsOnOrder
+            description: "The number of units already ordered from suppliers."
+          - name: ReorderLevel
+            description: "The stock level used to plan new orders."
+          - name: Discontinued
+            description: "Shows if the product is no longer sold."
+
+      - name: categories
+        description: "Product categories."
+        columns:
+          - name: CategoryID
+            description: "The ID of the category."
+          - name: CategoryName
+            description: "The name of the category."
+          - name: Description
+            description: "A short description of the category."
+
+      - name: customers
+        description: "Customer details."
+        columns:
+          - name: CustomerID
+            description: "The ID of the customer."
+          - name: CompanyName
+            description: "The name of the customer's company."
+          - name: ContactName
+            description: "The name of the main contact."
+          - name: City
+            description: "The customer's city."
+          - name: Region
+            description: "The customer's region."
+          - name: Country
+            description: "The customer's country."

@@ -1,0 +1,27 @@
+
+name: 'sales_analytics_dbt'
+version: '1.0.0'
+config-version: 2
+
+profile: 'sales_analytics_dbt'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  sales_analytics_dbt:
+    staging:
+      +schema: staging
+      +materialized: view
+
+    marts:
+      +schema: marts
+      +materialized: table

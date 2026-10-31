@@ -1,0 +1,127 @@
+version: 2
+models:
+  # Core models
+
+  - name: fact_sales
+    description: "Sales transactions at order_item."
+    columns:
+      - name: order_id
+        description: "Identifier of the order."
+        data_tests:
+          - not_null
+
+      - name: product_id
+        description: "Identifier of the product sold."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_products')
+                field: product_id
+
+      - name: customer_id
+        description: "Identifier of the customer who placed the order."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+
+      - name: order_date
+        data_tests:
+          - not_null
+
+      - name: quantity
+        data_tests:
+          - not_null
+
+      - name: sales_amount
+        data_tests:
+          - not_null
+
+  - name: dim_products
+    description: "Product dimension containing product and category info."
+    columns:
+      - name: product_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: product_name
+        data_tests:
+          - not_null
+
+  - name: dim_customers
+    description: "Customer dimension containing customer info."
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+
+  # Reporting marts
+
+  - name: mart_sales_performance
+    description: "Monthly sales performance metrics."
+    columns:
+      - name: sales_month
+        data_tests:
+          - not_null
+          - unique
+
+      - name: total_sales
+        data_tests:
+          - not_null
+
+      - name: total_orders
+        data_tests:
+          - not_null
+
+      - name: total_quantity_sold
+        data_tests:
+          - not_null
+
+      - name: average_order_value
+        data_tests:
+          - not_null
+
+  - name: mart_product_performance
+    description: "Sales performance aggregated by product."
+    columns:
+      - name: product_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: total_sales
+        data_tests:
+          - not_null
+
+      - name: total_quantity_sold
+        data_tests:
+          - not_null
+
+      - name: total_orders
+        data_tests:
+          - not_null
+
+  - name: mart_customer_performance
+    description: "Sales performance aggregated by customer."
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: total_sales
+        data_tests:
+          - not_null
+
+      - name: total_orders
+        data_tests:
+          - not_null
+
+      - name: total_quantity_sold
+        data_tests:
+          - not_null
